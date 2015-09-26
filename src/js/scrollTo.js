@@ -3,7 +3,9 @@
 
     var mainNav = doc.querySelector(".main-nav"),
         elemToScroll = isMobile() ? doc.body : doc.querySelector("main"),
-        to;
+        to,
+        executed = false,
+        skills = doc.querySelector('.skills');
     
     mainNav.addEventListener("click", function(e) {
 
@@ -46,13 +48,23 @@
         } else {
             doc.querySelector('.left-panel').classList.remove('fixed');
         }
+        
+        if (doc.body.scrollTop >= skills.offsetTop - 200) {
+            if (!executed) {
+                animationSkills();
+                executed = true;
+            }
+        }
     })
 
-    // doc.querySelector('main').addEventListener('scroll', function(e) {
-        // if (e.target.scrollTop >= 1057) {
-            animationSkills();
-        // }
-    // })
+    doc.querySelector('main').addEventListener('scroll', function(e) {
+        if (e.target.scrollTop >= skills.offsetTop - 200) {
+            if (!executed) {
+                animationSkills();
+                executed = true;
+            }
+        }
+    })
 
 
     /**
@@ -60,6 +72,7 @@
      */
 
     function animationSkills () {
+
         var skillsLis = doc.querySelectorAll('#skills li'),
             length = skillsLis.length,
             i = 0;
