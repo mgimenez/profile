@@ -5,7 +5,8 @@
         elemToScroll = isMobile() ? doc.body : doc.querySelector("main"),
         to,
         executed = false,
-        skills = doc.querySelector('.skills');
+        skills = doc.querySelector('.skills'),
+        var a = 2;
     
     mainNav.addEventListener("click", function(e) {
 
