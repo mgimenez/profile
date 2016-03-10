@@ -168,10 +168,10 @@ section {
     		background-clip: padding-box;
     		border-color: rgba(102,102,102,0.4);
     		font-weight: bold;
-			transform: perspective( 200px ) rotateY( 180deg );
+			transform: rotateY( 180deg );
 
-			& span{
-				transform: translateY(-50%) rotateY(-180deg) perspective(600px);
+			& span {
+				transform: translateY(-50%) rotateY(-180deg);
 			}
 
 		}
