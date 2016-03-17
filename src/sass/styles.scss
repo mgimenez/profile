@@ -13,6 +13,9 @@ a {
 body {
 	overflow: hidden;
 	font-family: 'Raleway', sans-serif;
+	-webkit-font-smoothing: subpixel-antialiased;
+	-webkit-text-stroke:1px transparent;
+	-webkit-backface-visibility: hidden;
 	font-weight: 100;
 	line-height: 1.125;
 }
@@ -89,6 +92,7 @@ section {
 
 	h2 {
 		font-size: 45px;
+		max-width: 680px;
 	}
 
 	h5 {
@@ -120,7 +124,7 @@ section {
 	}
 
 	p {
-		font-family: Tahoma;
+		font-family: Tahoma, Geneva, sans-serif;
 		color: #999;
 	}
 
