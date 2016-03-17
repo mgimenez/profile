@@ -18,6 +18,7 @@ body {
 	-webkit-backface-visibility: hidden;
 	font-weight: 100;
 	line-height: 1.125;
+	font-size: 16px;
 }
 
 .left-panel {
@@ -29,16 +30,22 @@ body {
 	color: #fff;
 	position: fixed;
 }
+
+@keyframes flip {
+    from {transform: rotateY( 0 );}
+    to {transform: rotateY( 360deg );}
+}
 header {
 	overflow: hidden;
 	margin: 50px 0 70px 20px;
 	img{
 		float: left;
+		animation: flip 1s ease-out;;
 	}
 
 	h1 {
 		float: right;
-		font-size: 30px;
+		font-size: 1.875rem;
 		position: relative;
 		top: 43px;
 		
@@ -54,7 +61,7 @@ nav {
 
 		&:after {
 			content: '>';
-			font-size: 9px;
+			font-size: 0.567rem;
 			position: absolute;
 			top: 2px;
 			margin-left: 5px;
@@ -91,21 +98,48 @@ section {
     min-height: 600px;
 
 	h2 {
-		font-size: 45px;
+		font-size: 2.81rem;
 		max-width: 680px;
 	}
 
 	h5 {
 		margin: 0 0 10px 0;
-		font-size: 20px;
+		font-size: 1.25rem;
 		font-weight: 400;
 	}
+
 
 	a + a {
 		margin-left: 15px;
 	}
 
 }
+.icon-icon-li,
+.icon-icon-tw,
+.icon-icon-profile {
+	transition: color 0.5s ease-out;
+}
+
+.icon-icon-github:before {
+	transition: background-color 0.5s ease-out;
+}
+
+.icon-icon-li:hover {
+	color: #297CB2;
+}
+
+.icon-icon-tw:hover {
+	color: #63AEEB;
+}
+
+.icon-icon-profile:hover {
+	color: #666;
+}
+
+.icon-icon-github:hover:before {
+	background: #000;
+}
+
 
 .resume {
 	padding-top: 50px;
@@ -117,15 +151,20 @@ section {
     }
 
 	h3 {
-		font-size: 27px;
+		font-size: 1.68rem;
 		color: #8C6115;
 		margin-bottom: 45px;
+		span {
+			//tweak no break line "UI / UX"
+			display: inline-block;
+		}
 
 	}
 
 	p {
-		font-family: Tahoma, Geneva, sans-serif;
+		font-family: Arial, Geneva, sans-serif;
 		color: #999;
+		font-size: 1.1rem;
 	}
 
 	p + p {
@@ -282,12 +321,12 @@ footer {
 	padding: 50px;
 
 	p {
-		font-size: 21px;
+		font-size: 1.31rem;
 	}
 
 }
 .title-section {
-	font-size: 32px;
+	font-size: 2rem;
 	font-weight: bold;
 	margin-bottom: 20px;
     letter-spacing: 0.12em;
@@ -301,22 +340,6 @@ footer {
 	}
 
 } 
-
-.icon-icon-li:hover {
-	color: #297CB2;
-}
-
-.icon-icon-tw:hover {
-	color: #63AEEB;
-}
-
-.icon-icon-github:hover:before {
-	background: #000;
-}
-
-.icon-icon-profile:hover {
-	color: #666;
-}
 
 @media screen and (max-width: 960px) {
 	
