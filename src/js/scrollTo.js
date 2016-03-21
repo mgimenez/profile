@@ -2,7 +2,7 @@
     'use strict';
 
     var mainNav = doc.querySelector(".main-nav"),
-        elemToScroll = isMobile() ? doc.body : doc.querySelector("main"),
+        elemToScroll = doc.body,
         to,
         executed = false,
         skills = doc.querySelector('.skills');
