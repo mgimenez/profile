@@ -11,7 +11,7 @@ module.exports = function(grunt) {
                 roundingPrecision: -1
             },
             css: {
-                src: ['src/stylesheets/*.css'],
+                src: ['src/css/*.css'],
                 dest: 'build/css/styles.min.css'
             }
         },
@@ -35,7 +35,7 @@ module.exports = function(grunt) {
                         cwd: 'src/assets/',
                         src: ['**'],
                         dest: 'build/assets'
-                    },{
+                    }, {
                         expand: true,
                         cwd: 'src/',
                         src: ['*.html'],
@@ -43,22 +43,37 @@ module.exports = function(grunt) {
                     }
                 ]
             }
-        }
+        },
 
-        //     watch: {
-        //         gruntfile: {
-        //             files: '<%= jshint.gruntfile.src %>',
-        //             tasks: ['jshint:gruntfile']
-        //         },
-        //         lib: {
-        //             files: '<%= jshint.lib.src %>',
-        //             tasks: ['jshint:lib', 'nodeunit']
-        //         },
-        //         test: {
-        //             files: '<%= jshint.test.src %>',
-        //             tasks: ['jshint:test', 'nodeunit']
-        //         },
-        //     },
+        compass: { // Task
+            dist: {
+                options: {
+                    sassDir: 'src/sass',
+                    cssDir: 'src/css'
+                }
+            }
+        },
+
+        watch: {
+            css: {
+                files: 'src/**/*.scss',
+                tasks: ['compass:dist'],
+                options: {
+                    interrupt: true,
+                },
+            }
+        },
+
+        connect: {
+            server: {
+                options: {
+                    port: 9001,
+                    hostname: 'localhost',
+                    base: 'src',
+                    protocol: 'http'
+                }
+            }
+        }
 
     });
 
@@ -66,9 +81,12 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-compass');
+    grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-connect');
 
     // Default task.
-    grunt.registerTask('default', ['build']);
-    grunt.registerTask('build', ['cssmin', 'uglify', 'copy']);
+    grunt.registerTask('server', ['connect', 'compass:dist', 'watch']);
+    grunt.registerTask('build', ['compass:dist', 'cssmin', 'uglify', 'copy']);
 
 };
