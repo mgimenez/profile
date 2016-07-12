@@ -1,5 +1,28 @@
 'use strict';
 
+/**
+ * matiasgimenez.me Grunfile
+ *
+ * :: Init Setup ::
+ * Install depencencies
+ * $ npm install
+ * 
+ * :: Development Setup ::
+ * Run local web server
+ * $ grunt server
+ * Navigate
+ * http://localhost:9001
+ *
+ * :: Building Setup ::
+ * Create deliverable files
+ * $ grunt build
+ *
+ * :: Deploing Setup ::
+ * Deploy deliverable files to gh-pages branch
+ * $ grunt deploy
+ *
+ */
+ 
 module.exports = function(grunt) {
 
     // Project configuration.
@@ -29,7 +52,6 @@ module.exports = function(grunt) {
         copy: {
             assets: {
                 files: [
-                    // includes files within path 
                     {
                         expand: true,
                         cwd: 'src/assets/',
@@ -45,7 +67,7 @@ module.exports = function(grunt) {
             }
         },
 
-        compass: { // Task
+        compass: {
             dist: {
                 options: {
                     sassDir: 'src/sass',
