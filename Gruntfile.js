@@ -95,7 +95,14 @@ module.exports = function(grunt) {
         buildGhPages: {
             ghPages: {
                 options: {
-                    dist: '/build',
+                    dist: 'build',
+                    pull: false
+                }
+            },
+            production: {
+                options: {
+                    build_branch: 'gh-pages',
+                    dist: 'build',
                     pull: false
                 }
             }
