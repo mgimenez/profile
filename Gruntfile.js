@@ -56,11 +56,39 @@ module.exports = function(grunt) {
 
         watch: {
             css: {
-                files: 'src/**/*.scss',
-                tasks: ['compass:dist'],
+                files: ['src/**/*.scss', 'src/js/scrollTo.js'],
+                tasks: ['compass:dist', 'jshint'],
                 options: {
                     interrupt: true,
                 },
+            }
+        },
+
+        processhtml: {
+            build: {
+                files: {
+                    'build/index.html': ['src/index.html']
+                }
+            }
+        },
+
+        jshint: {
+            options: {
+                curly: true,
+                eqeqeq: false,
+                forin: true,
+                immed: true,
+                latedef: true,
+                noempty: true,
+                nonbsp: true,
+                nonew: true,
+                undef: true,
+                unused: true,
+                browser: true,
+                devel: true
+            },
+            files: {
+                src: ['src/js/scrollTo.js']
             }
         },
 
@@ -84,9 +112,11 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-compass');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-connect');
+    grunt.loadNpmTasks('grunt-processhtml');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
 
     // Default task.
     grunt.registerTask('server', ['connect', 'compass:dist', 'watch']);
-    grunt.registerTask('build', ['compass:dist', 'cssmin', 'uglify', 'copy']);
+    grunt.registerTask('build', ['compass:dist', 'cssmin', 'uglify', 'copy', 'processhtml:build']);
 
 };

@@ -1,13 +1,72 @@
 (function(win, doc){
     'use strict';
 
-    var mainNav = doc.querySelector(".main-nav"),
+    var mainNav = doc.querySelector('.main-nav'),
         elemToScroll = doc.body,
         to,
         executed = false,
         skills = doc.querySelector('.skills');
+
+    /**
+     * Scroll navigation
+     * @function
+     * @param {Element} element - Element to scroll, in general document.body
+     * @param {Number} to - Offset on pixels of element to where to go
+     * @param {Number} duration - Duration on miliseconds of animation
+     * 
+     */
+    function scrollTo(element, to, duration) {
+        if (duration < 0) {
+            return;
+        }
+        var difference = to - element.scrollTop;
+        var perTick = difference / duration * 10;
+
+        setTimeout(function() {
+            element.scrollTop = element.scrollTop + perTick;
+
+            if (element.scrollTop == to || element.offsetHeight + element.scrollTop + 1 >= element.scrollHeight) {
+                return;
+            }
+            scrollTo(element, to, duration - 10);
+        }, 10);
+    }
+
+    /**
+     * Returns boolean if width screen is less to 960px
+     * @function
+     * 
+     */
+    function isMobile() {
+        return (screen.width < 960);
+    }
+
+    /**
+     * Auto animation on skill section
+     * @function
+     *
+     */
+    function animationSkills () {
+
+        var skillsLis = doc.querySelectorAll('#skills li'),
+            length = skillsLis.length,
+            i = 0;
+
+        setInterval(function() {
+            if (i < length) {
+                if (skillsLis[i].classList.contains('animation')) {
+                    skillsLis[i].classList.remove('animation');
+                } else {
+                    skillsLis[i].classList.add('animation');
+                }
+                i++;
+            } else {
+                i = 0;
+            }
+        }, 1000);
+    }
     
-    mainNav.addEventListener("click", function(e) {
+    mainNav.addEventListener('click', function(e) {
 
         if (e.target.nodeName === 'A') {
             e.preventDefault();
@@ -20,24 +79,9 @@
 
           scrollTo(elemToScroll, to, 500);
         }
-    }, false)
+    }, false);
 
-    function scrollTo(element, to, duration) {
-        if (duration < 0) return;
-        var difference = to - element.scrollTop;
-        var perTick = difference / duration * 10;
-
-        setTimeout(function() {
-            element.scrollTop = element.scrollTop + perTick;
-
-            if (element.scrollTop == to || element.offsetHeight + element.scrollTop + 1 >= element.scrollHeight) return;
-            scrollTo(element, to, duration - 10);
-        }, 10);
-    }
-
-    function isMobile() {
-        return (screen.width < 960);
-    }
+    
 
     /**
      * Sticky header on top for mobile
@@ -55,8 +99,9 @@
                 executed = true;
             }
         }
-    })
+    });
 
+    // Start animation when the scroll is in skill section
     doc.querySelector('main').addEventListener('scroll', function(e) {
         if (e.target.scrollTop >= skills.offsetTop - 200) {
             if (!executed) {
@@ -64,50 +109,6 @@
                 executed = true;
             }
         }
-    })
-
-
-    /**
-     * Auto animation on skill section
-     */
-
-    function animationSkills () {
-
-        var skillsLis = doc.querySelectorAll('#skills li'),
-            length = skillsLis.length,
-            i = 0;
-
-        // Random skills
-        // setInterval(function(){
-        //     var random = getRandomInt(0, skillsLis.length);
-        //     skillsLis[random].classList.add('animation');
-        //     setTimeout(function(){
-        //         skillsLis[random].classList.remove('animation');
-        //     },1000)
-        // }, 1000)
-        
-        // function getRandomInt(min, max) {
-        //     return Math.floor(Math.random() * (max - min + 1)) + min;
-        // }
-
-        setInterval(function() {
-            if (i < length) {
-                if (skillsLis[i].classList.contains('animation')) {
-                    skillsLis[i].classList.remove('animation');
-                } else {
-                    skillsLis[i].classList.add('animation');
-                }
-                // setTimeout(function(){
-                    //skillsLis[i].classList.remove('animation');
-                    //alert()
-                // },1000)
-                i++;
-            } else {
-                i = 0;
-            }
-        }, 1000)
-    }
-
-
+    });
 
 }(window, window.document));
