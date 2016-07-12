@@ -92,6 +92,15 @@ module.exports = function(grunt) {
             }
         },
 
+        buildGhPages: {
+            ghPages: {
+                options: {
+                    dist: "build",
+                    pull: false
+                }
+            }
+        },
+
         connect: {
             server: {
                 options: {
@@ -114,9 +123,11 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-processhtml');
     grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-build-gh-pages');
 
     // Default task.
     grunt.registerTask('server', ['connect', 'compass:dist', 'watch']);
     grunt.registerTask('build', ['compass:dist', 'cssmin', 'uglify', 'copy', 'processhtml:build']);
+    grunt.registerTask('deploy', ['build', 'buildGhPages']);
 
 };
